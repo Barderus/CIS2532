@@ -34,7 +34,7 @@ arr_floats = np.linspace(0.0, 1.0, num = 5) # Array = [0.0, 0.25, 0.5, 0.75, 1.0
 print(f"Create a float array from 0.0 to 1.0 incrementin by 0.25:\n{arr_floats}")
 
 # Reshape array into different number of dimensions
-reshape_arr = np.arange(1,21).reshape(4,5) # Create a 4D array from 1 to 21 not inclusive with 5 elements
+reshape_arr = np.arange(1,21).reshape(4,5) # Create a 4 by 5 array from 1 to 21 not inclusive
 print(f"\n4D array of 5 elements:")
 for x in reshape_arr:
     for i in x:
