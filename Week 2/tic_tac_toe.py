@@ -29,6 +29,23 @@ def create_board():
     board = board.astype(str)
     return board
 
+def is_marked(board, coord_x, coord_y):
+    """
+    Checks if a space on the Tic-Tac-Toe board is marked.
+
+    Parameters:
+    - board (numpy.ndarray): A 3x3 numpy array representing the Tic-Tac-Toe board.
+    - coord_x (int): The x-coordinate (row index) of the space to check.
+    - coord_y (int): The y-coordinate (column index) of the space to check.
+
+    Returns:
+    - True if the space is marked, False otherwise.
+    """
+
+    if board[coord_x, coord_y] == "X" or board[coord_x, coord_y] == "O":
+        return True
+    return False
+
 def place_marker(board, coord_x, coord_y, player):
     """
     Place a marker on the Tic-Tac-Toe board at specified coordinates.
@@ -123,28 +140,56 @@ def play_game():
     4. After each move, the board is updated and displayed.
     5. The game continues until one player wins or the game ends in a draw.
     6. Once the game concludes, players have the option to replay.
-
     """
 
-    player1 = input("Player 1, do you want to be X or O? ").upper()
-    if player1 == "X":
-        player2 = "O"
-    else:
-        player2 = "X"
+    # Prompt players to choose their markers
+    while True:
+        player1 = input("Player 1, do you want to be X or O? ").upper()
+        if player1 == "X":
+            player2 = "O"
+            break
+        elif player1 == "O":
+            player2 = "X"
+            break
+        else:
+            print("Invalid input. Please choose 'X' or 'O'.")
+
     print(f"Player 1 is {player1} and Player 2 is {player2}")
 
+    # Create an empty game board
     board = create_board()
     print()
     print_board(board)
 
+    # Main game loop
     while True:
-        # Player 1
-        coord_x = int(input("\nPlayer 1, enter the x coordinate: ")) - 1
-        coord_y = int(input("Player 1, Enter the y coordinate: ")) - 1
-        board = place_marker(board, coord_x, coord_y, player1)
+        # Player 1's turn
+        while True:
+            try:
+                # Get coordinates for Player 1's move
+                coord_x = int(input("\nPlayer 1, enter the x coordinate: ")) - 1
+                coord_y = int(input("Player 1, Enter the y coordinate: ")) - 1
+
+                # Check if coordinates are within bounds
+                if coord_x < 0 or coord_y < 0 or coord_x > 2 or coord_y > 2:
+                    print("Invalid coordinates. Please enter numbers between 1 and 3.")
+                    continue
+            except ValueError:
+                print("Invalid input. Please enter integers.")
+                continue
+            
+            # Check if the selected position is already marked
+            if is_marked(board, coord_x, coord_y):
+                print("This position is already occupied. Please choose another position.")
+            else:
+                # Place Player 1's marker on the board
+                board = place_marker(board, coord_x, coord_y, player1)
+                break  # Exit the loop when a valid position is entered
+
         print()
         print_board(board)
 
+        # Check if Player 1 wins or the game ends in a draw
         if check_winner(board, player1):
             print("\n\tWe have a winner! Player 1 wins!")
             replay()
@@ -153,12 +198,33 @@ def play_game():
             print("\n\tIt's a draw!")
             replay()
                     
-        # Player 2
-        coord_x2 = int(input("\nPlayer 2, enter the x coordinate: ")) - 1
-        coord_y2 = int(input("Player 2, Enter the y coordinate: ")) - 1
-        board = place_marker(board, coord_x2, coord_y2, player2)
+        # Player 2's turn
+        while True:
+            try:
+                # Get coordinates for Player 2's move
+                coord_x2 = int(input("\nPlayer 2, enter the x coordinate: ")) - 1
+                coord_y2 = int(input("Player 2, Enter the y coordinate: ")) - 1
+
+                # Check if coordinates are within bounds
+                if coord_x2 < 0 or coord_y2 < 0 or coord_x2 > 2 or coord_y2 > 2:
+                    print("Invalid coordinates. Please enter numbers between 1 and 3.")
+                    continue
+            except ValueError:
+                print("Invalid input. Please enter integers.")
+                continue
+            
+            # Check if the selected position is already marked
+            if is_marked(board, coord_x2, coord_y2):
+                print("This position is already occupied. Please choose another position.")
+            else:
+                # Place Player 2's marker on the board
+                board = place_marker(board, coord_x2, coord_y2, player2)
+                break  # Exit the loop when a valid position is entered
+
         print()
         print_board(board)
+
+        # Check if Player 2 wins or the game ends in a draw
         if check_winner(board, player2):
             print("\n\tWe have a winner! Player 2 wins!")
             replay()
@@ -166,6 +232,8 @@ def play_game():
         if check_draw(board):
             print("\n\tIt's a draw!")
             replay()
+
+
 
 def replay():
     """
