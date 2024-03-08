@@ -146,11 +146,11 @@ def play_game():
         print_board(board)
 
         if check_winner(board, player1):
-            print("\nWe have a winner!")
+            print("\n\tWe have a winner! Player 1 wins!")
             replay()
 
         if check_draw(board): 
-            print("It's a draw!")
+            print("\n\tIt's a draw!")
             replay()
                     
         # Player 2
@@ -160,11 +160,11 @@ def play_game():
         print()
         print_board(board)
         if check_winner(board, player2):
-            print("\nWe have a winner!")
+            print("\n\tWe have a winner! Player 2 wins!")
             replay()
 
         if check_draw(board):
-            print("It's a draw!")
+            print("\n\tIt's a draw!")
             replay()
 
 def replay():

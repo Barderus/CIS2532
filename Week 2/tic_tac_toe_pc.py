@@ -5,6 +5,7 @@ Title: Tic-Tac-Toe game
 Description: This is a Tic-Tac-Toe game that can be played by one players versus a computer. It uses a 3x3 2D array to store the game board.
 '''
 import numpy as np
+import random as rand
 
 def main():
     print("\tWelcome to Tic-Tac-Toe!")
@@ -77,14 +78,22 @@ def pc_move(board, pc):
     """
     First, get the computer player to make a random (valid) move. Pick a random X and random Y, 
     check if that cell is occupied. Make the move, or pick new numbers
+    """
+    x_coord_rand = rand.randint(0,3)
+    y_coord_rand = rand.randint(0,3)
 
+    """
     Second, if there is a winning move to make, make it! For every valid move: 
     make the move, see if it has won, unmake the move if not, and try the next move. 
     If there's no winning move, make a random move
+    """
 
+    """
     Third: restructure your code so you can copy a board, and see if there is a winning move on that board. 
     For each valid move: copy the board, make the move on the copy, check the copy of the board for a win, etc.
-
+    """
+    
+    """
     Fourth: for each valid move, make the move as your opponent on a copy of the board. 
     If it's a winner, make the move as you since you're blocking the opponent from winning. 
     (Having first checked that there's no move that allows you to win). Random move otherwise.
@@ -166,11 +175,11 @@ def play_game():
         print_board(board)
 
         if check_winner(board, player1):
-            print("\nWe have a winner!")
+            print("\n\tWe have a winner! Player 1 wins!")
             replay()
 
         if check_draw(board): 
-            print("It's a draw!")
+            print("\n\tIt's a draw!")
             replay()
 
         # PC move
