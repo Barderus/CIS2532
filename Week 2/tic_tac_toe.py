@@ -5,31 +5,73 @@ Title: Tic-Tac-Toe game
 Description: This is a Tic-Tac-Toe game that can be played by two players. It uses a 3x3 2D array to store the game board.
 '''
 import numpy as np
+
 def main():
     print("\tWelcome to Tic-Tac-Toe!")
     play = input("Do you want to play? (yes/no): ")
     if play.lower() == "yes":
         play_game()
     else:
-        print("\tGoodbye!")
+        print("\tThank you! See you later!!")
 
 def create_board():
+    """
+    Create a 3x3 board for a Tic-Tac-Toe game.
+
+    Returns:
+    - board (numpy.ndarray): A 3x3 numpy array representing the Tic-Tac-Toe board.
+
+    The function creates a 3x3 numpy array representing the Tic-Tac-Toe board with
+    numbers 1 through 9 assigned as initial placeholders for each cell. This function
+    is used to initialize the game board before starting a new game.
+    """
     board = np.arange(1, 10).reshape(3, 3)
     board = board.astype(str)
     return board
 
 def place_marker(board, coord_x, coord_y, player):
-    '''
-    This function places a marker on the board
-        X or O  
-    '''
+    """
+    Place a marker on the Tic-Tac-Toe board at specified coordinates.
+
+    Parameters:
+    - board (numpy.ndarray): A 3x3 numpy array representing the Tic-Tac-Toe board.
+    - coord_x (int): The x-coordinate (row index) where the marker will be placed.
+    - coord_y (int): The y-coordinate (column index) where the marker will be placed.
+    - player (str): The marker to be placed on the board. It can be 'X' or 'O'.
+
+    Returns:
+    - board (numpy.ndarray): The updated Tic-Tac-Toe board after placing the marker.
+
+    The function modifies the Tic-Tac-Toe board by placing the specified marker ('X' or 'O')
+    at the given coordinates (coord_x, coord_y). 
+    """
+
     board[coord_x, coord_y] = player
     return board
 
-# A function to print the 3x3 2D list and make it look like a board
 def print_board(board):
-    for item in board:
-        print(item)
+    """
+    Print the Tic-Tac-Toe board.
+
+    Parameters:
+    - board (numpy.ndarray): A 3x3 numpy array representing the Tic-Tac-Toe board.
+
+    The function prints the Tic-Tac-Toe board to the console. Each row of the board
+    is printed as a separate line, with the elements separated by spaces.
+    """
+
+    for row in range(len(board)):
+        # Print each row of the board
+        for col in range(len(board[row])):
+            # Print each column of the board
+            print(" " + str(board[row][col]) + " ", end="")
+            if col < len(board[row]) - 1:
+                print("|", end="")
+        print()  # Move to the next line
+
+        if row < len(board) - 1:
+            # Print horizontal lines between rows
+            print("-" * (len(board) * 4 - 1))
 
 def check_winner(board, player):
     '''
@@ -45,14 +87,15 @@ def check_winner(board, player):
     # Define the array for the specified player's markers
     player_arr = np.full((3, 3), player)
 
+    # Check rows for win
     if np.any(np.all(board == player_arr, axis=1)):
         return True
 
-    # Columns
+    # Check Columns for win
     if np.any(np.all(board == player_arr, axis=0)):
         return True
 
-    # Diagonals
+    # Check Diagonals for win
     if np.all(np.diag(board) == player) or np.all(np.diag(np.fliplr(board)) == player):
         return True
 
@@ -65,10 +108,23 @@ def check_draw(board):
     return True
 
 def play_game():
-    '''
-    This function will start the game and call all the other functions
-    
-    '''
+    """
+    Start and manage the Tic-Tac-Toe game.
+
+    This function initiates the Tic-Tac-Toe game by prompting Player 1 to choose
+    either 'X' or 'O'. It then sets up the game board, displays it, and allows
+    players to make moves alternately. The game continues until a player wins or
+    the game ends in a draw.
+
+    The game flow includes the following steps:
+    1. Player 1 chooses 'X' or 'O', and Player 2 gets assigned the opposite marker.
+    2. The initial empty game board is displayed.
+    3. Players take turns entering coordinates to place their markers on the board.
+    4. After each move, the board is updated and displayed.
+    5. The game continues until one player wins or the game ends in a draw.
+    6. Once the game concludes, players have the option to replay.
+
+    """
 
     player1 = input("Player 1, do you want to be X or O? ").upper()
     if player1 == "X":
@@ -78,17 +134,19 @@ def play_game():
     print(f"Player 1 is {player1} and Player 2 is {player2}")
 
     board = create_board()
-    print(board)
+    print()
+    print_board(board)
 
     while True:
         # Player 1
-        coord_x = int(input("Player 1, enter the x coordinate: ")) - 1
+        coord_x = int(input("\nPlayer 1, enter the x coordinate: ")) - 1
         coord_y = int(input("Player 1, Enter the y coordinate: ")) - 1
         board = place_marker(board, coord_x, coord_y, player1)
-        print(board)
+        print()
+        print_board(board)
 
         if check_winner(board, player1):
-            print("We have a winner!")
+            print("\nWe have a winner!")
             replay()
 
         if check_draw(board): 
@@ -96,12 +154,13 @@ def play_game():
             replay()
                     
         # Player 2
-        coord_x2 = int(input("Player 2, enter the x coordinate: ")) - 1
+        coord_x2 = int(input("\nPlayer 2, enter the x coordinate: ")) - 1
         coord_y2 = int(input("Player 2, Enter the y coordinate: ")) - 1
         board = place_marker(board, coord_x2, coord_y2, player2)
-        print(board)
+        print()
+        print_board(board)
         if check_winner(board, player2):
-            print("We have a winner!")
+            print("\nWe have a winner!")
             replay()
 
         if check_draw(board):
@@ -109,11 +168,20 @@ def play_game():
             replay()
 
 def replay():
+    """
+    Check if the user would like to play again.
+
+    This function prompts the user to decide whether they want to play the Tic-Tac-Toe game again.
+    If the user inputs 'y' for yes, the game is restarted by calling the `play_game()` function.
+    If the user inputs 'n' for no, a farewell message is displayed, and the program exits.
+    """
     
     replay = input("Would you like to play again? (y/n): ").lower()
     if replay == "y":
         play_game()
     else:
         print("It was nice playing with you. See you next time.")
+        exit()
 
-main()
+if __name__ == "__main__":
+    main()
