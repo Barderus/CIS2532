@@ -1,8 +1,8 @@
 '''
 Name: Gabriel dos Reis
-Date: 2021-04-07
+Date: 3/13/2024
 Title: Tic-Tac-Toe game
-Description: This is a Tic-Tac-Toe game that can be played by two players. It uses a 3x3 2D array to store the game board.
+Description: This is a Tic-Tac-Toe game that can be played by a player vs computer. It uses a 3x3 2D array to store the game board.
 '''
 import numpy as np
 import random as rand
@@ -201,7 +201,7 @@ def play_game():
                     
         # PC's turn
         while True:
-            # Get coordinates for Player 2's move
+            # Get coordinates for PC move
             x_coord_rand = rand.randint(0,2)
             y_coord_rand = rand.randint(0,2)
             
@@ -209,14 +209,14 @@ def play_game():
             if is_marked(board, x_coord_rand, y_coord_rand):
                 print()
             else:
-                # Place Player 2's marker on the board
+                # Place PC's marker on the board
                 board = place_marker(board, x_coord_rand, y_coord_rand, pc)
                 break  # Exit the loop when a valid position is entered
         
         print()
         print_board(board)
 
-        # Check if Player 2 wins or the game ends in a draw
+        # Check if PC wins or the game ends in a draw
         if check_winner(board, pc):
             print("\n\tWe have a winner! PC!")
             replay()

@@ -1,6 +1,6 @@
 '''
 Name: Gabriel dos Reis
-Date: 2021-04-07
+Date: 3/13/2024
 Title: Tic-Tac-Toe game
 Description: This is a Tic-Tac-Toe game that can be played by two players. It uses a 3x3 2D array to store the game board.
 '''
