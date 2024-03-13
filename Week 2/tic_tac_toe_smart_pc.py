@@ -91,6 +91,49 @@ def print_board(board):
             # Print horizontal lines between rows
             print("-" * (len(board) * 4 - 1))
 
+    
+    # For AI use minimax algorithm
+def make_strategic_move(board, pc_marker, opponent_marker):
+
+    # Step 1: Check for Winning Move
+    for row in range(3):
+        for col in range(3):
+            if board[row][col] == ' ':
+                # Try placing the PC's marker and check if it results in a win
+                board[row][col] = pc_marker
+                if check_winner(board, pc_marker):
+                    return row, col  # Found a winning move
+                # Undo the move
+                board[row][col] = ' '
+
+   # Step 2: Check for Blocking Opponent Move
+    for row in range(3):
+        for col in range(3):
+            if board[row][col] == ' ':
+                # Try placing the opponent's marker and check if it results in a win
+                board[row][col] = opponent_marker
+                if check_winner(board, opponent_marker):
+                    # If opponent wins, block their move by placing PC's marker in that position
+                    board[row][col] = pc_marker
+                    return row, col
+                # Undo the move
+                board[row][col] = ' '
+
+    # Step 3: Fallback Move (Make a random move)
+    # Import random module if not already imported
+    available_moves = []
+    for row in range(3):
+        for col in range(3):
+            if board[row][col] == ' ':
+                available_moves.append((row, col))
+    if available_moves:
+        return rand.choice(available_moves)  # Choose a random move from available positions
+    else:
+        # Board is full (no available moves)
+        return None
+    
+
+
 def check_winner(board, player):
     '''
     Check if the specified player has won the game.
@@ -200,17 +243,25 @@ def play_game():
             replay()
                     
         # PC's turn
+        
         while True:
-            # Get coordinates for Player 2's move
-            x_coord_rand = rand.randint(0,2)
-            y_coord_rand = rand.randint(0,2)
-            
-            # Check if the selected position is already marked
-            if is_marked(board, x_coord_rand, y_coord_rand):
-                print()
+            # Get potential move from strategic function (replace with actual move if found)
+            move = make_strategic_move(board, pc, player1)
+
+            # Check if strategic move found, otherwise use random coordinates
+            if move is not None:
+                row, col = move  # Unpack move into row and col
             else:
-                # Place Player 2's marker on the board
-                board = place_marker(board, x_coord_rand, y_coord_rand, pc)
+                # Fallback to random move if no strategic option available
+                row = rand.randint(0, 2)
+                col = rand.randint(0, 2)
+
+            # Check if the selected position is already marked
+            if is_marked(board, row, col):
+                print("This position is already occupied. Please choose another position.")
+            else:
+                # Place PC's marker on the board
+                board = place_marker(board, row, col, pc)
                 break  # Exit the loop when a valid position is entered
         
         print()
