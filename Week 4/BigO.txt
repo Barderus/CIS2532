@@ -1,0 +1,60 @@
+''' Big O Notation '''
+
+
+O(1) Algorithms
+ ** O(1) Algorithms have a constant time complexity. 
+Regardless of the size of the input data, it will always take the same amount of time to execute.
+
+Ex 1:
+array = [1, 2, 3, 4, 5]
+print(array[2])     # Accessing a x element will always take the same amount of time
+
+Ex 2:
+def is_positive(num):
+    return num > 0
+
+Ex 3:
+my_dict = {"a":1, "b":2, "c":3, "d":4}
+print(my_dict["b"])
+
+O(n) Algorithms
+ ** The execution time increases linearly with the size of the input
+
+# Ex 1:
+def linear_search(array, target):
+    for element in arr:
+        if element == target:
+            return True
+    return False
+
+# Ex 2:
+def print_list(array):
+    for element in array:
+        print(element)
+
+# Ex 3:
+def sum_array(arr):
+    total = 0
+    for element in arr:
+        total += element
+    return total
+
+
+O(n^2) Algorithms
+ ** The time taken by the algorithm increase quadratically with the size of the input.
+        Use of nested for loop.
+
+# Examples:
+    Bubble Sort
+    Selection Sort
+    Insertion Sort
+    Mareix multiplication
+
+O(log n)
+    ** The time taken by teh algorithm increases logarithmic with the size o the input. It grows much slower rate compared to linear_search
+        linear or quadratic time.
+
+Ex 1:
+    - binary search
+    - Merge sort
+

@@ -1,0 +1,23 @@
+Search algorithms
+    - Linear search
+    - Binary search
+    - Recursive binary search
+
+Search functions and methods
+    - List method index
+    - String methods count, index, and rindex
+
+
+
+Sorting Algorithms
+    - Selection Sort
+    - Insertion sort
+    - Recursive merge sort
+    - Bucket sort
+    - Recursive quicksort
+
+
+Sorting functions and methods
+    - List method sort
+    - .sorted()
+    - DataFrame methods sort_index and sort_values

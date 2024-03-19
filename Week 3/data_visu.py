@@ -2,8 +2,12 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 import random
+import time
 
-rolls = [random.randrange(1, 7) for i in range(1000000000)]
+
+# Starting time
+start_time = time.time()
+rolls = [random.randrange(1, 7) for i in range(100)]
 
 values, frequencies = np.unique(rolls, return_counts=True)
 
@@ -34,3 +38,8 @@ for bar, frequency in zip(axes.patches, frequencies):
               fontsize=11, ha='center', va='bottom')
 
 plt.show()
+
+# End timing
+end_time = time.time()
+execution_time = end_time - start_time
+print(f"Execution time: {execution_time} seconds to display 1000000000 rolls.")
