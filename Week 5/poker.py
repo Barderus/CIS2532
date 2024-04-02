@@ -21,11 +21,16 @@ def initialize_deck():
 
 def display_deck(deck):
     '''Display the deck in four columns.'''
-    for i in range(0, len(deck), 13):
-        column = deck[i:i+13]
-        for card in column:
-            print(f"{card[0]} of {card[1]}", end="\t")
+    num_columns = 4
+    cards_per_column = len(deck) // num_columns
+
+    for i in range(cards_per_column):
+        for j in range(num_columns):
+            index = i + j * cards_per_column
+            card = deck[index]
+            print(f"{card[0]:>5} of {card[1]}, ", end="\t")
         print()
+
 
 def deal_cards(deck):
     ''' Deal 5 cards to the player'''
@@ -37,7 +42,7 @@ def deal_cards(deck):
 def display_hand(hand):
     '''Display the hand of the player.'''
     for card in hand:
-        print(f"{card[0]} of {card[1]}")
+        print(f"\t{card[0]} of {card[1]}")
 
 def is_pair(hand):
     '''Return True if the hand has a pair, False otherwise.
@@ -54,8 +59,9 @@ def is_two_pair(hand):
     Two pairs are two cards of the same value and another two cards of the same value.
     '''
     ranks = [card[0] for card in hand]
+    unique_ranks = set(ranks)
     pairs = 0
-    for rank in ranks:
+    for rank in unique_ranks:
         if ranks.count(rank) == 2:
             pairs += 1
     return pairs == 2
@@ -88,10 +94,7 @@ def is_flush(hand):
     A flush is five cards of the same suit.
     '''
     suits = [card[1] for card in hand]
-    for suit in suits:
-        if suits.count(suit) == 5:
-            return True
-    return False
+    return len(set(suits)) == 1
 
 def is_full_house(hand):
     '''Return True if the hand has a full house, False otherwise.
@@ -121,8 +124,11 @@ def is_royal_flush(hand):
     return is_straight_flush(hand) and values == ["10", "Jack", "Queen", "King", "Ace"]
 
 def main():
+
     '''Main function.'''
     deck = initialize_deck()
+    print("The deck is:", len(deck), "cards long.")
+    display_deck(deck)
     hand = deal_cards(deck)
     print("\nYour hand is:")
     display_hand(hand)
@@ -146,6 +152,51 @@ def main():
         print("You have a Pair!")
     else:
         print("You have a High Card!")
+
+
+def test_hands():
+    #High card
+    hand0 = [("2", "Hearts"), ("3", "Diamonds"), ("4", "Clubs"), ("5", "Spades"), ("Ace", "Hearts")] # Pass - High card
+    # Pair
+    hand1 = [("Ace", "Hearts"), ("Ace", "Diamonds"), ("3", "Clubs"), ("7", "Spades"), ("10", "Hearts")] # Fail - You have two pairs
+    # Two pair
+    hand2 = [("Ace", "Hearts"), ("Ace", "Diamonds"), ("3", "Clubs"), ("3", "Spades"), ("10", "Hearts")] # Pass - you have two pair
+    # Three of a kind
+    hand3 = [("Ace", "Hearts"), ("Ace", "Diamonds"), ("Ace", "Clubs"), ("7", "Spades"), ("10", "Hearts")] # Pass - 3 of a kinda
+    # Straight
+    hand4 = [("2", "Hearts"), ("3", "Diamonds"), ("4", "Clubs"), ("5", "Spades"), ("6", "Hearts")]  # Fail - High card, should be a straight
+    # Flush
+    hand5 = [("2", "Hearts"), ("5", "Hearts"), ("8", "Hearts"), ("10", "Hearts"), ("King", "Hearts")] # Pass - Flush
+    # Full house
+    hand6 = [("Ace", "Hearts"), ("Ace", "Diamonds"), ("Ace", "Clubs"), ("10", "Spades"), ("10", "Hearts")] # Pass - Full house
+    # Four of a kind
+    hand7 = [("Ace", "Hearts"), ("Ace", "Diamonds"), ("Ace", "Clubs"), ("Ace", "Spades"), ("10", "Hearts")] # Pass - Four of a kind
+    # Straight flush
+    hand8 = [("2", "Hearts"), ("3", "Hearts"), ("4", "Hearts"), ("5", "Hearts"), ("6", "Hearts")] # Fail - Flush
+    # Royal Flush
+    hand9 = [("10", "Hearts"), ("Jack", "Hearts"), ("Queen", "Hearts"), ("King", "Hearts"), ("Ace", "Hearts")] # Fail - Flush
+
+    if is_royal_flush(hand9):
+        print("You have a Royal Flush!")
+    elif is_straight_flush(hand9):
+        print("You have a Straight Flush!")
+    elif is_four_of_a_kind(hand9):
+        print("You have Four of a Kind!")
+    elif is_full_house(hand9):
+        print("You have a Full House!")
+    elif is_flush(hand9):
+        print("You have a Flush!")
+    elif is_straight(hand9):
+        print("You have a Straight!")
+    elif is_three_of_a_kind(hand9):
+        print("You have Three of a Kind!")
+    elif is_two_pair(hand9):
+        print("You have Two Pairs!")
+    elif is_pair(hand9):
+        print("You have a Pair!")
+    else:
+        print("You have a High Card!")
+
 
 if __name__ == "__main__":
     main()
