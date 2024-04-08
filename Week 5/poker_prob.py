@@ -3,6 +3,8 @@ Title: poker.py
 Author: Gabriel dos Reis
 Date: 04/01/2024
 Description: A program that simulates a poker game.
+
+I want to check the probability of each hand.
 '''
 import random
 
@@ -125,6 +127,7 @@ def is_royal_flush(hand):
 
 def main():
 
+    '''Main function.'''
     deck = initialize_deck()
     print("The deck is:", len(deck), "cards long.")
     display_deck(deck)
@@ -151,6 +154,51 @@ def main():
         print("You have a Pair!")
     else:
         print("You have a High Card!")
+
+
+def test_hands():
+    #High card
+    hand0 = [("2", "Hearts"), ("3", "Diamonds"), ("4", "Clubs"), ("5", "Spades"), ("Ace", "Hearts")] # Pass - High card
+    # Pair
+    hand1 = [("Ace", "Hearts"), ("Ace", "Diamonds"), ("3", "Clubs"), ("7", "Spades"), ("10", "Hearts")] # Fail - You have two pairs
+    # Two pair
+    hand2 = [("Ace", "Hearts"), ("Ace", "Diamonds"), ("3", "Clubs"), ("3", "Spades"), ("10", "Hearts")] # Pass - you have two pair
+    # Three of a kind
+    hand3 = [("Ace", "Hearts"), ("Ace", "Diamonds"), ("Ace", "Clubs"), ("7", "Spades"), ("10", "Hearts")] # Pass - 3 of a kinda
+    # Straight
+    hand4 = [("2", "Hearts"), ("3", "Diamonds"), ("4", "Clubs"), ("5", "Spades"), ("6", "Hearts")]  # Fail - High card, should be a straight
+    # Flush
+    hand5 = [("2", "Hearts"), ("5", "Hearts"), ("8", "Hearts"), ("10", "Hearts"), ("King", "Hearts")] # Pass - Flush
+    # Full house
+    hand6 = [("Ace", "Hearts"), ("Ace", "Diamonds"), ("Ace", "Clubs"), ("10", "Spades"), ("10", "Hearts")] # Pass - Full house
+    # Four of a kind
+    hand7 = [("Ace", "Hearts"), ("Ace", "Diamonds"), ("Ace", "Clubs"), ("Ace", "Spades"), ("10", "Hearts")] # Pass - Four of a kind
+    # Straight flush
+    hand8 = [("2", "Hearts"), ("3", "Hearts"), ("4", "Hearts"), ("5", "Hearts"), ("6", "Hearts")] # Fail - Flush
+    # Royal Flush
+    hand9 = [("10", "Hearts"), ("Jack", "Hearts"), ("Queen", "Hearts"), ("King", "Hearts"), ("Ace", "Hearts")] # Fail - Flush
+
+    if is_royal_flush(hand9):
+        print("You have a Royal Flush!")
+    elif is_straight_flush(hand9):
+        print("You have a Straight Flush!")
+    elif is_four_of_a_kind(hand9):
+        print("You have Four of a Kind!")
+    elif is_full_house(hand9):
+        print("You have a Full House!")
+    elif is_flush(hand9):
+        print("You have a Flush!")
+    elif is_straight(hand9):
+        print("You have a Straight!")
+    elif is_three_of_a_kind(hand9):
+        print("You have Three of a Kind!")
+    elif is_two_pair(hand9):
+        print("You have Two Pairs!")
+    elif is_pair(hand9):
+        print("You have a Pair!")
+    else:
+        print("You have a High Card!")
+
 
 if __name__ == "__main__":
     main()
