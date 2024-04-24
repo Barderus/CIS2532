@@ -3,11 +3,11 @@ import imageio.v2 as imageio
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
-text = Path(r"Week 7\RomeoJuliet.txt").read_text()
+text = Path(r"RomeoAndJuliet.txt").read_text()
 
 # WordCloud fills non-white areas of a mask image with text
 # Load the mask using the imread function from the imageio module
-mask_image = imageio.imread(r"Week 7\mask_heart.png")
+mask_image = imageio.imread(r"mask_heart.png")
 
 # Configure the WorldCloud object
 '''
@@ -22,6 +22,6 @@ wordCloud = WordCloud(width = 1000, height=1000, colormap='prism', mask=mask_ima
 wordCloud = wordCloud.generate(text)
 
 # Saving the word cloud as an image
-wordCloud.to_file("RomeoJulietHeart.png")
+wordCloud.to_file("RomeoJulietHeart1.png")
 
 plt.imshow(wordCloud)
