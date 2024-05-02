@@ -1,0 +1,61 @@
+Machine Learning
+
+-- Rather than programming expertise into our applications,
+we program them to learn from data. Lots of it.
+
+Predictions
+-- Improve weather forecasting to save lives, minimize injuries
+and property damages
+-- Improve cancer diagnoses and treatment regimens
+-- Detect fraudulent credit-card purchases and insurance claims
+--Predict the bets strategies for coaches and players to use to win more games
+and championships.
+
+Scikit-Learn (sklearn)
+
+-- Convenietly packages the most effective machine-learning algorithms as estimators
+-- They are encapsulted
+-- To figure out which model works the best for the project, you gotta run them with different datasets
+and pick the best one(s)
+
+Datasets
+-- The amount data that's available today is already enormous and continues to grow exponentially.
+-- In the past, people would say "I'm drowning on data and I don't know what to do with it.",
+now they say "flood me with big data so I can use machine learning and powerful computing capabilities to extract insigts
+and make predictions.
+-- Repository (openml.org)
+-- Data with rows and columns to predict some value
+-- Libraries like scikit-learn have the popular datasets to experient with
+
+Types of Machine Learning
+
+-- Can be divided into two main categories: Supervised and Unsupervised Machine Learning.
+There is also semi-supervised and reinforcement learning, but in this chapter, it will not be explored.
+
+    --- Supervised Machine Learning
+        Trained labeled data
+        The datasets consists of rows and columns.
+            Row = sample
+            Column = target (dog or cat)
+                Target is the value you're trying to predict for new data
+        Two categories:
+            Classification
+                Classification simplest algorithm = k-nearest neighbor.
+                    K-nearest neighbor is a lazy learner, they just memorize the training data, and each time
+                    there is a need to make a prediction, they search for the nearest neighbor from the whole trainig data,
+                    which makes them very slow during predictions.
+                It predicts the discrete classes (categories) to which sample belong.
+
+                In Binary classification, the goal is to classify the input data into two mutually exclusive categories.
+                The training data is labeled as either true or false, positive or negative, 0 and 1, spam and not spam, etc.
+
+                Multi-classification has at least two mutually exclusive class label, where the goal is to predict which class a given input belongs to.
+            Regression
+                Regression models predict a continous output, for example, predictiing the salary of a person given their education degree,
+                previous work experience, geographical location, and level of seniority.
+    -- Unsupervised Machine Learning
+        Trained with Unlabeled data
+            Clustering algorithms to group unlabeled data that are more similar than any other group of data.
+
+            K-Means clustering algorithm is easily the most popular and widely used algorithm for clustering task.
+                Centroid-based algorithm where the user must define the required number of clusters.

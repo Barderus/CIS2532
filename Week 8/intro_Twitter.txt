@@ -1,0 +1,6 @@
+Twitter is a popular big-data source for making preditions.
+    Data mining -> Searching large collections of data for insight
+    Sentiment in tweets can help make predictions.
+    Hundreds of millions of tweets are sent every day with many thousands sent per second.
+
+Twitter API free tier was cancelled. All the learning ahead cannot run successfuly. 
