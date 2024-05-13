@@ -1,0 +1,26 @@
+Deep learning is a powerful subet of machine learning.
+Resource-intensive deep learning solutions are possible due to:
+    * Big data
+    * Significant processor power
+    * Faster internet speeds
+    * Advancements in parallel computing hardware and software
+
+Keras and TensorFlow
+    Keras offers a friendly interface to Google's TensorFlow
+        Also works with Microsoft CNTK and other
+
+Models
+    Deep learning models connect multiple layers
+    Keras facilitates experienting with many models to find the best for your application
+    More data = better trained deep learning models
+
+
+Processing power 
+    Deep learning can require Significant Processing power
+    Training models on big-data can take hours, days, or more
+
+Neural Network
+    Artifical neural networks to learning
+    Similar to how scientists believe our brains work
+
+    

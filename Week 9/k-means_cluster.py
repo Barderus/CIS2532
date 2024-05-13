@@ -83,7 +83,7 @@ pca = PCA(n_components=2, random_state=11)
 
 # Transforming the Iris dataset feature into 2D
 pca.fit(iris.data)  # trains estimator once
-# Calling transofrm again to reduce the cluster centroid to 2D for plotting
+# Calling transform again to reduce the cluster centroid to 2D for plotting
 iris_pca = pca.transform(iris.data)
 
 print(iris_pca.shape)

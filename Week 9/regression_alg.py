@@ -41,15 +41,16 @@ for p, e in zip(predicted[::5], expected[::5]):  # check every 5th element
 # lambda implements y = mx + b
 predict = (lambda x: linear_regression.coef_ * x + 
                      linear_regression.intercept_)
+print(f"Predict temperature for NYC Jan 1924: {predict(1924)}")
 print(f"Predict temperature for NYC Jan 2024: {predict(2024)}")
-print(f"Predict temperature for NYC Jan 2074: {predict(2074)}")
+print(f"Predict temperature for NYC Jan 2124: {predict(2124)}")
 
 
 # Visualizing the dataset with seaborn
 axes = sns.scatterplot(data=nyc, x='Date', y='Temperature',
     hue='Temperature', palette='winter', legend=False)  
 
-axes.set_ylim(10, 70)  # scale y-axis 
+axes.set_ylim(5, 70)  # scale y-axis 
 
 x = np.array([min(nyc.Date.values), max(nyc.Date.values)])
 
